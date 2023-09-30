@@ -1,0 +1,43 @@
+﻿<Window x:Class="RDBtoJSON.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RDBtoJSON.ParamControls"
+        mc:Ignorable="d"
+        Height="415" Width="750" MinHeight="330" MinWidth="650" 
+        Title="Database to JSON" Closed="Window_Closed">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="4*" MaxWidth="300" MinWidth="150"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Tabele aktualnej bazy" Padding="0,2,2,2" Height="21" Margin="7,10,10,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center"/>
+        <Label Content="Wyniki zapytania" Padding="0,2,2,2" Height="21" Margin="7,10,10,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center"/>
+        <TreeView x:Name="viewTables" Margin="7,39,10,42" Grid.Row="1" Grid.Column="1" />
+        <TreeView x:Name="viewQuery" Margin="7,39,10,42" Grid.Row="1" Grid.Column="2" />
+        <Button Content="Połącz" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="btnConnect_Click" Grid.Row="1" Grid.Column="0" Height="22" VerticalAlignment="Bottom"/>
+        <Button Content="Zapisz wyniki" Margin="0,0,10,10" Click="btnSave_Click" Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Height="22"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Typ bazy danych"  Margin="10,10,188,0" Padding="0,2,2,2" VerticalAlignment="Top" Height="22"/>
+        <ComboBox x:Name="cmbDbType" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="150" Height="22">
+            <ComboBoxItem IsSelected="True">SQL Server</ComboBoxItem>
+            <ComboBoxItem>SQLite</ComboBoxItem>
+            <ComboBoxItem>MySQL</ComboBoxItem>
+        </ComboBox>
+        <StackPanel Margin="10,27,10,42" Grid.Row="1" Grid.Column="0">
+            <local:MySQLControl x:Name="ParamsMySQL" Visibility="Collapsed"/>
+            <local:SQLiteControl x:Name="ParamsSQLite" Visibility="Collapsed"/>
+            <local:SqlServerControl x:Name="ParamsSqlServer"/>
+        </StackPanel>
+        <Label Grid.Row="0" Grid.Column="0" Content="Zapytanie SELECT:" Height="22" Padding="0,2,2,2" Margin="185,10,11,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtQuery" Height="23" Margin="185,35,90,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" />
+        <Label Content="Parametry połączenia" Padding="0,2,2,2" Height="21" Margin="26,10,10,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center"/>
+        <Button Content="Wykonaj" Margin="0,0,10,5" Click="btnPerformQuery_Click" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23"/>
+    </Grid>
+</Window>
